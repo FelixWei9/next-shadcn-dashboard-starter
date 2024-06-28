@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import React, { useState, useEffect } from 'react';
+
 import {
   Card,
   CardContent,
@@ -7,7 +8,6 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card';
-import FileUpload from '@/components/file-uploader';
 
 interface DataItem {
   id: number;
@@ -15,13 +15,13 @@ interface DataItem {
   // Define other properties as per your data structure
 }
 
-export function RecentSales() {
+export function Results() {
   const [data, setData] = useState<DataItem[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8080/resume/getAllResumes');
+        const response = await fetch('https://api.example.com/data');
         const result: DataItem[] = await response.json();
         setData(result);
       } catch (error) {
@@ -36,7 +36,7 @@ export function RecentSales() {
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7">
       <Card className="col-span-8 md:col-span-8">
         <CardHeader>
-          <CardTitle>Recent Sales</CardTitle>
+          <CardTitle>Recent Analytics</CardTitle>
           <CardDescription>
             You made 265 sales this month.
           </CardDescription>
@@ -64,8 +64,6 @@ export function RecentSales() {
               )}
             </div>
           </div>
-          <FileUpload className="border border-dashed border-gray-500">
-          </FileUpload>
         </CardContent>
       </Card>
     </div>
